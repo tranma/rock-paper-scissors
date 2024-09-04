@@ -19,6 +19,7 @@ Player Choices:
 - [m]: Mark
 - [q]: Queenie
 - [b]: Bary
+- [e]: Ensemble of Computer Players
 ```
 
 If you pick `Human` the game will prompt you to choose a move every round for that player.
@@ -29,6 +30,8 @@ The following are computer players:
 - `Mark` will remember how you played (up to a certain point).
 - `Queenie` will also remember how you played up to a point, but also how your sequence of plays are correlated.
 - `Bary` makes some assumptions about the way you play and update its beliefs as the game progresses.
+
+If you pick `Ensemble` you will be prompted to choose the computer players to add to your ensemble.
 
 ## Players
 
@@ -49,6 +52,8 @@ The reinforcement learning player (Queenie) uses a longer term strategy that tak
 
 The Bayes player (Bary) keeps an explicit distribution for the possible moves,
 and update it as it observes new frequencies.
+
+The ensemble player randomly chooses a member of the ensemble to play each round.
 
 ## Results
 

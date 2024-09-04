@@ -6,6 +6,7 @@ from rps.players.weighted import Weighted
 from rps.players.markov import Markov
 from rps.players.reinforce import Q
 from rps.players.bayes import Bayes
+from rps.players.ensemble import Ensemble
 
 def get_valid_input(prompt, f):
     while True:
@@ -16,12 +17,24 @@ def get_valid_input(prompt, f):
         except ValueError:
             print("Invalid input. Please try again.")
 
-def player_choice(s: str, have_human):
-    h = have_human
-    if   s == 'h':
-        m = Human(name="Human")
-        h = True
-    elif s == 'r':
+def player_choice_computer(s: str) -> Player:
+    if s == 'e':
+        n = get_valid_input(
+            "How many in the ensemble: ", lambda s: int(s))
+        ps = []
+        for i in range(n):
+            p = get_valid_input(
+                f"Choose ensemble player {i+1}: ",
+                lambda s: player_choice_computer_single(s))
+            ps.append(p)
+        m = Ensemble("Rabble", ps)
+        print(f"{m.name}: {[p.name for p in ps]}")
+    else:
+        m = player_choice_computer_single(s)
+    return m
+
+def player_choice_computer_single(s: str) -> Player:
+    if s == 'r':
         m = Weighted(name='Randy', weights=None)
     elif s == 's':
         m = Weighted(name='Scissorhands', weights=[1,1,8])
@@ -33,6 +46,15 @@ def player_choice(s: str, have_human):
         m = Bayes(name="Bary")
     else:
         raise ValueError(f"Invalid player {s}")
+    return m
+
+def player_choice(s: str, have_human):
+    h = have_human
+    if   s == 'h':
+        m = Human(name="Human")
+        h = True
+    else:
+        m = player_choice_computer(s)
     return m, h
 
 if __name__ == "__main__":
@@ -53,6 +75,7 @@ Player Choices:
 - [m]: Mark
 - [q]: Queenie
 - [b]: Bary
+- [e]: Rabble
     """
     print(player_viz)
     have_human = False
