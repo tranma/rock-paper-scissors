@@ -33,6 +33,44 @@ The following are computer players:
 
 If you pick `Ensemble` you will be prompted to choose the computer players to add to your ensemble.
 
+Here is an example of a full game:
+```
+python -m rps.cli
+Let's play Rock-Paper-Scissors!
+
+We will play N games, with M rounds per game.
+
+How many games: 100
+How many rounds per game: 1000
+
+Player Choices:
+- [h]: Human
+- [r]: Randy
+- [s]: Scissorhands
+- [m]: Mark
+- [q]: Queenie
+- [b]: Bary
+- [e]: Rabble
+
+Choose player 1: m
+Choose player 2: e
+How many in the ensemble: 4
+Choose ensemble player 1: m
+Choose ensemble player 2: b
+Choose ensemble player 3: q
+Choose ensemble player 4: r
+Rabble: ['Mark', 'Bary', 'Queenie', 'Randy']
+
+Mark              vs              Rabble
+
+████████████████████████████████████████
+
+Tournament Stats:
+Mark             Draw             Rabble
+42.29            17.84             39.87
+----------------------------------------
+```
+
 ## Players
 
 The purpose of the game is to choose the optimal next move from `{Rock, Paper, Scissors}`.
@@ -72,4 +110,10 @@ The `notebooks` directory contains some experimental results, summarised here.
 -------------------------------------------------------
 ```
 
-Overall the Mark, Markov chain player, performs best against the other players. Given the limited dimensions of data (only using the game's outcome and no other information on the players), this makes sense to me.
+Overall the Mark, Markov chain player, performs best against the other players. Given the limited dimensions of data (only using the game's outcome and no other information on the players), this makes sense.
+
+## Thoughts
+
+No one has made a dataset of rock-paper-scissors games, with player features corresponding to their wins/losses!
+
+I only explored the simplest methods I know. It would be interesting to try this project on a similar problem with more data.
